@@ -1,18 +1,21 @@
 import React from 'react';
-import { useTheme } from 'styled-components';
-
 import Header from '../Header';
-import PostsList from '../PostsList';
 import Footer from '../Footer';
+import Routes from '../../Routes';
+import { BrowserRouter, Link } from 'react-router-dom';
+import { Nav } from './styles';
 
 export default function Layout() {
-   const theme = useTheme();
-
    return (
-      <>
+      <BrowserRouter>
          <Header />
-         <PostsList />
+         <Nav>
+            <Link to="/">Home</Link>
+            <Link to="/posts">Posts</Link>
+            <Link to="/posts/3333">Post</Link>
+         </Nav>
+         <Routes />
          <Footer />
-      </>
+      </BrowserRouter>
    );
 }
