@@ -5,14 +5,14 @@ import Header from '../Header';
 import PostsList from '../PostsList';
 import Footer from '../Footer';
 
-export default function Layout({ onToggleTheme, selectedTheme }) {
+export default function Layout() {
    const theme = useTheme();
 
    return (
       <>
-         <Header onToggleTheme={onToggleTheme} selectedTheme={selectedTheme} />
+         <Header />
          <PostsList />
-         <Footer onToggleTheme={onToggleTheme} selectedTheme={selectedTheme} />
+         <Footer />
       </>
    );
 }

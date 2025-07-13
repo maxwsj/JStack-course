@@ -17,7 +17,7 @@ function App() {
    return (
       <ThemeProvider theme={currentTheme}>
          <GlobalStyle />
-         <Layout onToggleTheme={handleToggleTheme} selectedTheme={theme} />
+         <Layout />
       </ThemeProvider>
    );
 }
