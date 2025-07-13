@@ -1,16 +1,43 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ThemeContext from './ThemeContext';
 
-export function ThemeProv({ children }) {
-   const [theme, setTheme] = useState('dark');
+export class ThemeProv extends React.Component {
+   constructor(props) {
+      super(props);
 
-   const handleToggleTheme = () => {
-      setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+      let theme = 'dark';
+      try {
+         theme = JSON.parse(localStorage.getItem('theme'));
+      } catch (error) {
+         console.log(error);
+      }
+
+      this.state = {
+         theme,
+      };
+   }
+
+   handleToggleTheme = () => {
+      this.setState(
+         (prev) => ({
+            theme: prev.theme === 'dark' ? 'light' : 'dark',
+         }),
+         () => {
+            localStorage.setItem('theme', JSON.stringify(this.state.theme));
+         }
+      );
    };
 
-   return (
-      <ThemeContext.Provider value={{ theme, handleToggleTheme }}>
-         {children}
-      </ThemeContext.Provider>
-   );
+   render() {
+      return (
+         <ThemeContext.Provider
+            value={{
+               theme: this.state.theme,
+               handleToggleTheme: this.handleToggleTheme,
+            }}
+         >
+            {this.props.children}
+         </ThemeContext.Provider>
+      );
+   }
 }
