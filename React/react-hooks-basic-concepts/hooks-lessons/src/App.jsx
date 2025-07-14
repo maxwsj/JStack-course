@@ -1,35 +1,30 @@
-import { useCallback, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import './App.css';
 
-const fnCounter = new Set();
-
 function App() {
-   const [counter, setCounter] = useState(0);
+   const [counter, setCounter] = useState(1);
+   const [name, setName] = useState('');
 
-   const handlePlus = useCallback(() => {
+   const total = useMemo(() => {
+      return counter * 12313131 * 23313 * 213131;
+   }, [counter]);
+
+   function handlePlus() {
       setCounter((prevState) => prevState + 1);
-   }, []);
-
-   fnCounter.add(handlePlus);
-   console.log(fnCounter.size);
+   }
 
    return (
-      <>
-         <h1>useCallback</h1>
-         <div className="card">
-            <Button onClick={handlePlus} />
-         </div>
+      <div>
+         <h1>{counter}</h1>
+         <h4>{total}</h4>
+         <button onClick={handlePlus}>+</button>
+
          <br />
-         <div>{counter}</div>
-      </>
-   );
-}
-
-function Button(props) {
-   return (
-      <button onClick={props.onClick} style={{ marginRight: 10 }}>
-         +
-      </button>
+         <br />
+         <span>{name}</span>
+         <br />
+         <input onChange={(e) => setName(e.target.value)} />
+      </div>
    );
 }
 
