@@ -1,44 +1,35 @@
-import { useState, useEffect } from 'react';
+import { useCallback, useState } from 'react';
 import './App.css';
+
+const fnCounter = new Set();
 
 function App() {
    const [counter, setCounter] = useState(0);
-   const [name, SetName] = useState('');
 
-   useEffect(() => {
-      // IIFE -> Immediately Invoked Function Expression - Executar chamadas de APIs
-      (async () => {
-         // API call
-      })();
+   const handlePlus = useCallback(() => {
+      setCounter((prevState) => prevState + 1);
    }, []);
 
-   useEffect(() => {
-      // Determina o que fazer quando o componente for sair da tela
-      return () => {};
-   });
+   fnCounter.add(handlePlus);
+   console.log(fnCounter.size);
 
-   function handlePlus() {
-      setCounter((prevState) => prevState + 1);
-   }
-   function handleMinus() {
-      setCounter((prevState) => prevState - 1);
-   }
    return (
       <>
-         <h1>useState</h1>
+         <h1>useCallback</h1>
          <div className="card">
-            <button onClick={handlePlus} style={{ marginRight: 10 }}>
-               +
-            </button>
-            <button onClick={handleMinus}>-</button>
+            <Button onClick={handlePlus} />
          </div>
          <br />
          <div>{counter}</div>
-         <br />
-         <span>{name}</span>
-         <br />
-         <input onChange={(e) => SetName(e.target.value)} />
       </>
+   );
+}
+
+function Button(props) {
+   return (
+      <button onClick={props.onClick} style={{ marginRight: 10 }}>
+         +
+      </button>
    );
 }
 
