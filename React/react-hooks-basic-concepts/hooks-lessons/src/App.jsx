@@ -1,45 +1,21 @@
-import { useState, useEffect } from 'react';
+import { createContext, useContext } from 'react';
 import './App.css';
 
+const ThemeContext = createContext();
+
 function App() {
-   const [counter, setCounter] = useState(0);
-   const [name, SetName] = useState('');
-
-   useEffect(() => {
-      // IIFE -> Immediately Invoked Function Expression - Executar chamadas de APIs
-      (async () => {
-         // API call
-      })();
-   }, []);
-
-   useEffect(() => {
-      // Determina o que fazer quando o componente for sair da tela
-      return () => {};
-   });
-
-   function handlePlus() {
-      setCounter((prevState) => prevState + 1);
-   }
-   function handleMinus() {
-      setCounter((prevState) => prevState - 1);
-   }
    return (
-      <>
-         <h1>useState</h1>
+      <ThemeContext.Provider value={{ mode: 'dark' }}>
          <div className="card">
-            <button onClick={handlePlus} style={{ marginRight: 10 }}>
-               +
-            </button>
-            <button onClick={handleMinus}>-</button>
+            <Button />
          </div>
-         <br />
-         <div>{counter}</div>
-         <br />
-         <span>{name}</span>
-         <br />
-         <input onChange={(e) => SetName(e.target.value)} />
-      </>
+      </ThemeContext.Provider>
    );
+}
+
+function Button() {
+   const theme = useContext(ThemeContext);
+   return <button>{theme.mode}</button>;
 }
 
 export default App;
