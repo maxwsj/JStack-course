@@ -1,21 +1,54 @@
-import { createContext, useContext } from 'react';
+import { useReducer } from 'react';
 import './App.css';
 
-const ThemeContext = createContext();
+function reducer(state, action) {
+   switch (action.type) {
+      case 'plus':
+         return {
+            counter: state.counter + 1,
+            clicks: state.clicks + 1,
+         };
 
-function App() {
-   return (
-      <ThemeContext.Provider value={{ mode: 'dark' }}>
-         <div className="card">
-            <Button />
-         </div>
-      </ThemeContext.Provider>
-   );
+      case 'minus':
+         return {
+            counter: state.counter - 1,
+            clicks: state.clicks - 1,
+         };
+
+      default:
+         return state;
+   }
 }
 
-function Button() {
-   const theme = useContext(ThemeContext);
-   return <button>{theme.mode}</button>;
+const initialValue = {
+   counter: 2,
+   clicks: 0,
+};
+
+function App() {
+   const [state, dispatch] = useReducer(reducer, initialValue);
+
+   function handlePlus() {
+      dispatch({ type: 'plus' });
+   }
+   function handleMinus() {
+      dispatch({ type: 'minus' });
+   }
+   return (
+      <>
+         <h1>useReducer</h1>
+         <div className="card">
+            <button onClick={handlePlus} style={{ marginRight: 10 }}>
+               +
+            </button>
+            <button onClick={handleMinus}>-</button>
+         </div>
+         <br />
+         <h4>Cliques {state.clicks}</h4>
+         <h4>Counter {state.counter}</h4>
+         <br />
+      </>
+   );
 }
 
 export default App;
