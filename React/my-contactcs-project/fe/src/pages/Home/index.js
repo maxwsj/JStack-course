@@ -20,7 +20,8 @@ export default function Home() {
         <input type="text" placeholder="Pesquise pelo nome..." />
       </InputSearchContainer>
 
-      <Modal />
+      <Modal danger />
+
       <Header>
         <strong>3 contatos</strong>
         <Link to="/new">Novo contato</Link>
