@@ -16,11 +16,11 @@ import Modal from "components/Modal";
 export default function Home() {
   return (
     <Container>
+      <Modal danger />
+
       <InputSearchContainer>
         <input type="text" placeholder="Pesquise pelo nome..." />
       </InputSearchContainer>
-
-      <Modal danger />
 
       <Header>
         <strong>3 contatos</strong>
