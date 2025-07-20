@@ -18,10 +18,11 @@ export default function Home() {
   return (
     <Container>
       {/* <Modal danger /> */}
+      {/* <Loader /> */}
+
       <InputSearchContainer>
         <input type="text" placeholder="Pesquise pelo nome..." />
       </InputSearchContainer>
-      <Loader />
       <Header>
         <strong>3 contatos</strong>
         <Link to="/new">Novo contato</Link>
