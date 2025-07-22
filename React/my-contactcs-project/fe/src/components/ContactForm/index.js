@@ -54,8 +54,6 @@ export default function ContactForm({ buttonLabel }) {
     event.preventDefault();
   }
 
-  console.log(errors.length === 0);
-
   return (
     <Form onSubmit={handleSubmit} noValidate>
       <FormGroup error={getErrorMessageByFieldName("name")}>
