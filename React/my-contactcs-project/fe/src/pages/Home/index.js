@@ -57,3 +57,12 @@ export default function Home() {
     </Container>
   );
 }
+
+fetch("http://localhost:3001/contacts")
+  .then(async (response) => {
+    const data = await response.json();
+    console.log("response", data);
+  })
+  .catch((error) => {
+    console.log("erro", error);
+  });
