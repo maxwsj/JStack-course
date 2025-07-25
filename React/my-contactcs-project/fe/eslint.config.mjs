@@ -18,14 +18,14 @@ export default defineConfig([
       },
     },
     plugins: {
-      js,
       react: pluginReact,
       "react-hooks": reactHooks,
     },
-    extends: ["js/recommended", pluginReact.configs.flat.recommended],
+    extends: [js.configs.recommended, pluginReact.configs.flat.recommended],
     rules: {
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
+      "react/react-in-jsx-scope": "off",
     },
     settings: {
       react: {
