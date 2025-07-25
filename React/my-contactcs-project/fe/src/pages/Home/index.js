@@ -16,30 +16,39 @@ import Modal from "components/Modal";
 import Loader from "components/Loader";
 
 import { useEffect, useState, useMemo } from "react";
+import { delay } from "utils/delay";
 
 export default function Home() {
   const [contacts, setContacts] = useState([]);
   const [orderBy, setOrderBy] = useState("asc");
   const [searchTerm, setSearchTerm] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   const filteredContacts = useMemo(
     () =>
       contacts.filter((contact) =>
         contact.name.toLowerCase().includes(searchTerm.toLowerCase())
       ),
-      // Buscar por nome inteiro
-      // contact.name.toLowerCase().startsWith(searchTerm.toLowerCase())
+    // Buscar por nome inteiro
+    // contact.name.toLowerCase().startsWith(searchTerm.toLowerCase())
     [contacts, searchTerm]
   );
 
   useEffect(() => {
+    setIsLoading(true);
     fetch(`http://localhost:3001/contacts?orderBy=${orderBy}`)
       .then(async (response) => {
+        await delay(2000);
+
         const data = await response.json();
         setContacts(data);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.log("erro", error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, [orderBy]);
 
@@ -54,7 +63,7 @@ export default function Home() {
   return (
     <Container>
       {/* <Modal danger /> */}
-      {/* <Loader /> */}
+      <Loader isLoading={isLoading} />
 
       <InputSearchContainer>
         <input
