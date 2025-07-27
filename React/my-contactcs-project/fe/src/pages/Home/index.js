@@ -17,6 +17,7 @@ import Loader from "components/Loader";
 
 import { useEffect, useState, useMemo } from "react";
 import { delay } from "utils/delay";
+import ContactsService from "services/ContactsService";
 
 export default function Home() {
   const [contacts, setContacts] = useState([]);
@@ -38,14 +39,10 @@ export default function Home() {
     async function loadContacts() {
       try {
         setIsLoading(true);
-        const response = await fetch(
-          `http://localhost:3001/contacts?orderBy=${orderBy}`
-        );
 
-        await delay(2000);
+        const contactsList = await ContactsService.listContacts(orderBy);
 
-        const data = await response.json();
-        setContacts(data);
+        setContacts(contactsList);
       } catch (error) {
         console.log("error", error);
       } finally {
