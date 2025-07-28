@@ -7,7 +7,7 @@ class CategoryController {
 
     // Error Handler (Middleware express) -> Manipulador de erros
 
-    res.json(category);
+    res.status(201).json(category);
   }
 
   async store(req, res) {

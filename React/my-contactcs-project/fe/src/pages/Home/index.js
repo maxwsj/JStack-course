@@ -16,7 +16,6 @@ import Modal from "components/Modal";
 import Loader from "components/Loader";
 
 import { useEffect, useState, useMemo } from "react";
-import { delay } from "utils/delay";
 import ContactsService from "services/ContactsService";
 
 export default function Home() {
