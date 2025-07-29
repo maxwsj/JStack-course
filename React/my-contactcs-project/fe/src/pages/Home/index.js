@@ -17,7 +17,7 @@ import sad from "../../assets/images/sad.svg";
 import Modal from "components/Modal";
 import Loader from "components/Loader";
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import ContactsService from "services/ContactsService";
 import Button from "components/Button";
 
@@ -38,7 +38,7 @@ export default function Home() {
     [contacts, searchTerm]
   );
 
-  async function loadContacts() {
+  const loadContacts = useCallback(async () => {
     try {
       setIsLoading(true);
 
@@ -51,11 +51,11 @@ export default function Home() {
     } finally {
       setIsLoading(false);
     }
-  }
+  }, [orderBy]);
 
   useEffect(() => {
     loadContacts();
-  }, [orderBy]);
+  }, [loadContacts]);
 
   function handleToggleOrderBy() {
     setOrderBy((prevState) => (prevState === "asc" ? "desc" : "asc"));
