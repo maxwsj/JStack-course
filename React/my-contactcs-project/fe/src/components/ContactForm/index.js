@@ -1,9 +1,10 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useErrors from "../..//hooks/useErrors";
 
 import isEmailValid from "utils/isEmailValid";
 import formatPhone from "utils/formatPhone";
+import CategoriesService from "services/CategoriesService";
 
 import { Form, ButtonContainer } from "./styles";
 
@@ -15,12 +16,23 @@ export default function ContactForm({ buttonLabel }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [category, setCategory] = useState("");
+  const [categoryId, setCategoryId] = useState("");
+  const [categories, setCategories] = useState([]);
 
   const { errors, setError, removeError, getErrorMessageByFieldName } =
     useErrors();
 
   const isFormValid = name && errors.length === 0;
+
+  useEffect(() => {
+    async function loadCategories() {
+      const categoriesList = await CategoriesService.listCategories();
+
+      setCategories(categoriesList);
+    }
+
+    loadCategories();
+  }, []);
 
   function handleNameChange(event) {
     setName(event.target.value);
@@ -43,7 +55,7 @@ export default function ContactForm({ buttonLabel }) {
   }
 
   function handleCategoryChange(event) {
-    setCategory(event.target.value);
+    setCategoryId(event.target.value);
   }
 
   function handlePhoneChange(event) {
@@ -84,10 +96,13 @@ export default function ContactForm({ buttonLabel }) {
       </FormGroup>
 
       <FormGroup>
-        <Select value={category} onChange={handleCategoryChange}>
-          <option value="">Categoria</option>
-          <option value="instagram">Instagram</option>
-          <option value="discord">Discord</option>
+        <Select value={categoryId} onChange={handleCategoryChange}>
+          <option value="">Sem categoria</option>
+          {categories.map((category) => (
+            <option key={category.id} value={category.name}>
+              {category.name}
+            </option>
+          ))}
         </Select>
       </FormGroup>
 
