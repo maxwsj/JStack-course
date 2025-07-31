@@ -12,7 +12,7 @@ import Input from "components/Input";
 import FormGroup from "components/FormGroup";
 import Select from "components/Select";
 import Button from "components/Button";
-export default function ContactForm({ buttonLabel }) {
+export default function ContactForm({ buttonLabel, onSubmit }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -70,6 +70,8 @@ export default function ContactForm({ buttonLabel }) {
 
   function handleSubmit(event) {
     event.preventDefault();
+
+    onSubmit({ name, email, phone, categoryId });
   }
 
   return (
@@ -110,7 +112,7 @@ export default function ContactForm({ buttonLabel }) {
           <option value="">Sem categoria</option>
 
           {categories.map((category) => (
-            <option key={category.id} value={category.name}>
+            <option key={category.id} value={category.id}>
               {category.name}
             </option>
           ))}
@@ -126,6 +128,7 @@ export default function ContactForm({ buttonLabel }) {
   );
 }
 
-ContactForm.prototype = {
+ContactForm.propTypes = {
   buttonLabel: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
