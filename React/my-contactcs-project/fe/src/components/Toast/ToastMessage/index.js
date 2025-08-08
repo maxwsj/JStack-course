@@ -11,8 +11,20 @@ export default function ToastMessage({ message, onRemoveMessage }) {
     onRemoveMessage(id);
   }
 
+  function handleKeyDown(event) {
+    if (event.key === "Enter" || event.key === " ") {
+      onRemoveMessage(id);
+    }
+  }
+
   return (
-    <Container type={type} onClick={handleRemoveToast}>
+    <Container
+      type={type}
+      onClick={handleRemoveToast}
+      tabIndex={0}
+      role="button"
+      onKeyDown={handleKeyDown}
+    >
       {type === "danger" && <img src={xCircleIcon} alt="X" />}
       {type === "success" && <img src={checkCircleIcon} alt="Check" />}
       <strong>{text}</strong>
