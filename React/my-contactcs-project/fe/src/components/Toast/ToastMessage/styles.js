@@ -13,6 +13,7 @@ const containerVariants = {
 };
 
 export const Container = styled.div`
+  cursor: pointer;
   padding: 16px 32px;
   background-color: ${({ theme }) => theme.colors.primary.main};
   color: #fff;
