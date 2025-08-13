@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useState, useEffect } from "react";
+import { useState, useEffect, forwardRef, useImperativeHandle } from "react";
 import useErrors from "../..//hooks/useErrors";
 
 import isEmailValid from "utils/isEmailValid";
@@ -12,7 +12,11 @@ import Input from "components/Input";
 import FormGroup from "components/FormGroup";
 import Select from "components/Select";
 import Button from "components/Button";
-export default function ContactForm({ buttonLabel, onSubmit }) {
+
+const ContactForm = forwardRef(function ContactForm(
+  { buttonLabel, onSubmit },
+  ref
+) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -20,6 +24,19 @@ export default function ContactForm({ buttonLabel, onSubmit }) {
   const [categories, setCategories] = useState([]);
   const [isLoadingCategories, setIsLoadingCategories] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      setFieldsValues: (contact) => {
+        setName(contact.name);
+        setEmail(contact.email);
+        setPhone(contact.phone);
+        setCategoryId(contact.categoryId);
+      },
+    }),
+    []
+  );
 
   const { errors, setError, removeError, getErrorMessageByFieldName } =
     useErrors();
@@ -138,9 +155,11 @@ export default function ContactForm({ buttonLabel, onSubmit }) {
       </ButtonContainer>
     </Form>
   );
-}
+});
 
 ContactForm.propTypes = {
   buttonLabel: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
+
+export default ContactForm;
