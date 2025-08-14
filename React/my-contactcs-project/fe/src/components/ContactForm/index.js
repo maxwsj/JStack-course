@@ -29,10 +29,10 @@ const ContactForm = forwardRef(function ContactForm(
     ref,
     () => ({
       setFieldsValues: (contact) => {
-        setName(contact.name);
-        setEmail(contact.email);
-        setPhone(contact.phone);
-        setCategoryId(contact.categoryId);
+        setName(contact.name ?? "");
+        setEmail(contact.email ?? "");
+        setPhone(formatPhone(contact.phone ?? ""));
+        setCategoryId(contact.categoryId ?? "");
       },
     }),
     []

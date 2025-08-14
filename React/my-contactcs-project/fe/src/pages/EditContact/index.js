@@ -10,6 +10,8 @@ import toast from "utils/toast";
 
 export default function EditContact() {
   const [isLoading, setisLoading] = useState(true);
+  const [contactName, setContactName] = useState("");
+
   const contactFormRef = useRef(null);
 
   const { id } = useParams();
@@ -23,6 +25,7 @@ export default function EditContact() {
         contactFormRef.current.setFieldsValues(contactData);
 
         setisLoading(false);
+        setContactName(contactData.name);
       } catch {
         history.push("/");
         toast({ type: "danger", text: "Contato não encontrado!" });
@@ -38,7 +41,9 @@ export default function EditContact() {
     <>
       <Loader isLoading={isLoading} />
 
-      <PageHeader title="Editar Max William" />
+      <PageHeader
+        title={isLoading ? "Carregando.." : `Editar ${contactName}`}
+      />
 
       <ContactForm
         ref={contactFormRef}
