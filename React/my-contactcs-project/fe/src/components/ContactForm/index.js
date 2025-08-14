@@ -32,7 +32,7 @@ const ContactForm = forwardRef(function ContactForm(
         setName(contact.name ?? "");
         setEmail(contact.email ?? "");
         setPhone(formatPhone(contact.phone ?? ""));
-        setCategoryId(contact.categoryId ?? "");
+        setCategoryId(contact.category_id ?? "");
       },
     }),
     []
@@ -94,10 +94,6 @@ const ContactForm = forwardRef(function ContactForm(
     await onSubmit({ name, email, phone, categoryId });
 
     setIsSubmitting(false);
-    setName("");
-    setEmail("");
-    setPhone("");
-    setCategoryId("");
   }
 
   return (
