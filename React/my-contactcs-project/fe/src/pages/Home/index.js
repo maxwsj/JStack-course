@@ -78,6 +78,16 @@ export default function Home() {
     <Container>
       {/* <Modal danger /> */}
       <Loader isLoading={isLoading} />
+      <Modal
+        danger
+        title="Tem certeza que deseja remover o contato?"
+        confirmLabel={"Deletar"}
+      >
+        <p>
+          Você está prestes a remover um contato. Esta ação não pode ser
+          desfeita.
+        </p>
+      </Modal>
 
       {contacts.length >= 0 && (
         <InputSearchContainer>
