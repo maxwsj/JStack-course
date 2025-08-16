@@ -12,7 +12,7 @@ import Input from "components/Input";
 import FormGroup from "components/FormGroup";
 import Select from "components/Select";
 import Button from "components/Button";
-import useSafeASyncState from "hooks/useSafeAsyncState";
+import useSafeAsyncState from "hooks/useSafeAsyncState";
 
 const ContactForm = forwardRef(function ContactForm(
   { buttonLabel, onSubmit },
@@ -22,8 +22,8 @@ const ContactForm = forwardRef(function ContactForm(
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [categoryId, setCategoryId] = useState("");
-  const [categories, setCategories] = useSafeASyncState([]);
-  const [isLoadingCategories, setIsLoadingCategories] = useSafeASyncState(true);
+  const [categories, setCategories] = useSafeAsyncState([]);
+  const [isLoadingCategories, setIsLoadingCategories] = useSafeAsyncState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useImperativeHandle(

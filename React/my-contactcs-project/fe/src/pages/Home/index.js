@@ -25,9 +25,10 @@ import { useEffect, useState, useMemo, useCallback } from "react";
 import ContactsService from "services/ContactsService";
 import Button from "components/Button";
 import toast from "utils/toast";
+import useSafeAsyncState from "hooks/useSafeAsyncState";
 
 export default function Home() {
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useSafeAsyncState([]);
   const [orderBy, setOrderBy] = useState("asc");
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -55,12 +56,12 @@ export default function Home() {
 
       setHasError(false);
       setContacts(contactsList);
-    } catch (_) {
+    } catch {
       setHasError(true);
     } finally {
       setIsLoading(false);
     }
-  }, [orderBy]);
+  }, [orderBy, setContacts]);
 
   useEffect(() => {
     loadContacts();
