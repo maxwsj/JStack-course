@@ -2,7 +2,6 @@ import ContactForm from "components/ContactForm";
 import PageHeader from "components/PageHeader";
 import { useRef } from "react";
 import ContactsService from "services/ContactsService";
-import ContactMapper from "services/mappers/ContactMapper";
 import toast from "utils/toast";
 
 export default function NewContact() {
