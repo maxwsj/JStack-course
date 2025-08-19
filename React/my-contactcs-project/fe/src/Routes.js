@@ -1,4 +1,4 @@
-import EditContact from "pages/EditContact";
+import { Container as EditContact } from "pages/EditContact";
 import Home from "pages/Home";
 import NewContact from "pages/NewContact";
 import { Switch, Route } from "react-router-dom";
