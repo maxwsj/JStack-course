@@ -17,3 +17,7 @@ ReactPortal.propTypes = {
   containerId: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
 };
+
+ReactPortal.defaultProps = {
+  containerId: "react-portal-container",
+};
