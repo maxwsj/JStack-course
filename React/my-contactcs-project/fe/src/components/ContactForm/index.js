@@ -28,16 +28,16 @@ const ContactForm = forwardRef(function ContactForm(
     handleSubmit,
     getErrorMessageByFieldName,
     isFormValid,
-  } = useContactForm(onSubmit, ref);
+  } = useContactForm({ onSubmit, ref });
 
   return (
     <Form onSubmit={handleSubmit} noValidate>
       <FormGroup error={getErrorMessageByFieldName("name")}>
         <Input
+          error={getErrorMessageByFieldName("name")}
           placeholder="Nome *"
           value={name}
           onChange={handleNameChange}
-          error={getErrorMessageByFieldName("name")}
           disabled={isSubmitting}
         />
       </FormGroup>
@@ -52,12 +52,13 @@ const ContactForm = forwardRef(function ContactForm(
           disabled={isSubmitting}
         />
       </FormGroup>
+
       <FormGroup>
         <Input
+          maxLength="15"
           placeholder="Telefone"
           value={phone}
           onChange={handlePhoneChange}
-          maxLength="15"
           disabled={isSubmitting}
         />
       </FormGroup>
@@ -65,11 +66,10 @@ const ContactForm = forwardRef(function ContactForm(
       <FormGroup isLoading={isLoadingCategories}>
         <Select
           value={categoryId}
-          onChange={() => setCategoryId(event.target.value)}
+          onChange={(event) => setCategoryId(event.target.value)}
           disabled={isLoadingCategories || isSubmitting}
         >
           <option value="">Sem categoria</option>
-
           {categories.map((category) => (
             <option key={category.id} value={category.id}>
               {category.name}

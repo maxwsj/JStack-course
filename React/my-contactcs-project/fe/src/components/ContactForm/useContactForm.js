@@ -107,5 +107,6 @@ export default function useContactForm({ onSubmit, ref }) {
     getErrorMessageByFieldName,
     isFormValid,
     setCategories,
+    setCategoryId,
   };
 }
