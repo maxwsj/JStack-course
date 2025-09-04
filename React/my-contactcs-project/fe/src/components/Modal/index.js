@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import Button from "components/Button";
 import { Overlay, Container, Footer } from "./styles";
 import ReactPortal from "components/ReactPortal";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Modal({
   danger,
@@ -17,20 +17,29 @@ export default function Modal({
 }) {
   const [shouldRender, setShouldRender] = useState(visible);
 
+  const overlayRef = useRef(null);
+
   useEffect(() => {
     if (visible) {
       setShouldRender(true);
     }
 
-    let timeoutId;
-    if (!visible) {
-      timeoutId = setTimeout(() => {
-        setShouldRender(false);
-      }, 300);
+    function handleAnimationEnd() {
+      setShouldRender(false);
+    }
+
+    const overlayRefElement = overlayRef.current;
+    if (!visible && overlayRefElement) {
+      overlayRefElement.addEventListener("animationend", handleAnimationEnd);
     }
 
     return () => {
-      clearTimeout(timeoutId);
+      if (overlayRefElement) {
+        overlayRefElement.removeEventListener(
+          "animationend",
+          handleAnimationEnd
+        );
+      }
     };
   }, [visible]);
 
@@ -40,7 +49,7 @@ export default function Modal({
 
   return (
     <ReactPortal>
-      <Overlay isLeaving={!visible}>
+      <Overlay isLeaving={!visible} ref={overlayRef}>
         <Container danger={danger} isLeaving={!visible}>
           <h1>{title}</h1>
           <div className="modal-body">{children}</div>
