@@ -15,7 +15,7 @@ export default function Modal({
   onCancel,
   onConfirm,
 }) {
-  const { overlayRef, shouldRender } = useAnimatedUnmount(visible);
+  const { animatedElementRef, shouldRender } = useAnimatedUnmount(visible);
 
   if (!shouldRender) {
     return null;
@@ -23,7 +23,7 @@ export default function Modal({
 
   return (
     <ReactPortal>
-      <Overlay isLeaving={!visible} ref={overlayRef}>
+      <Overlay isLeaving={!visible} ref={animatedElementRef}>
         <Container danger={danger} isLeaving={!visible}>
           <h1>{title}</h1>
           <div className="modal-body">{children}</div>
