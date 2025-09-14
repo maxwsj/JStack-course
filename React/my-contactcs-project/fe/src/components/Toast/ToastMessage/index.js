@@ -3,14 +3,9 @@ import { Container } from "./styles";
 
 import xCircleIcon from "../../../assets/images/icons/x-circle.svg";
 import checkCircleIcon from "../../../assets/images/icons/check-circle.svg";
-import { useEffect } from "react";
+import { useEffect, memo } from "react";
 
-export default function ToastMessage({
-  message,
-  onRemoveMessage,
-  isLeaving,
-  animatedRef,
-}) {
+function ToastMessage({ message, onRemoveMessage, isLeaving, animatedRef }) {
   const { id, text, type, duration } = message;
 
   useEffect(() => {
@@ -63,3 +58,5 @@ ToastMessage.propTypes = {
     current: PropTypes.instanceOf(Element),
   }),
 };
+
+export default memo(ToastMessage);
