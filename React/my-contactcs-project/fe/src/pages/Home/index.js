@@ -1,4 +1,4 @@
-import { Container, ListHeader, Card } from "./styles";
+import { Container } from "./styles";
 
 import Loader from "components/Loader";
 import useHome from "./useHome";
@@ -12,7 +12,6 @@ import Modal from "components/Modal";
 
 export default function Home() {
   const {
-    isPending,
     isLoading,
     isLoadingDelete,
     isDeleteModalVisible,
