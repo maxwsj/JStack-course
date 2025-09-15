@@ -12,14 +12,15 @@ import Modal from "components/Modal";
 
 export default function Home() {
   const {
+    isPending,
+    isLoading,
+    isLoadingDelete,
+    isDeleteModalVisible,
     contacts,
     orderBy,
     searchTerm,
-    isLoading,
     hasError,
-    isDeleteModalVisible,
     contactBeingDeleted,
-    isLoadingDelete,
     filteredContacts,
     handleToggleOrderBy,
     handleChangeSearchTerm,
