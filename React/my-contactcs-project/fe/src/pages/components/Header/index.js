@@ -3,9 +3,9 @@ import { Container } from "./styles";
 import PropTypes from "prop-types";
 
 export default function Header({
-  hasError,
-  qtyOfContacts,
-  qtyOfFilteredContacts,
+  hasError = false,
+  qtyOfContacts = 0,
+  qtyOfFilteredContacts = 0,
 }) {
   const alignment = hasError
     ? "flex-end"
@@ -30,10 +30,4 @@ Header.propTypes = {
   hasError: PropTypes.bool.isRequired,
   qtyOfContacts: PropTypes.number.isRequired,
   qtyOfFilteredContacts: PropTypes.number.isRequired,
-};
-
-Header.defaultProps = {
-  hasError: false,
-  qtyOfContacts: 0,
-  qtyOfFilteredContacts: 0,
 };

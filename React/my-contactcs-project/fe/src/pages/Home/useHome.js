@@ -53,7 +53,7 @@ export default function useHome() {
         setIsLoading(false);
       }
     },
-    [orderBy, setContacts]
+    [orderBy]
   );
 
   useEffect(() => {

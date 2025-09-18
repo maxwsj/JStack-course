@@ -10,10 +10,10 @@ import { Card, ListHeader } from "./styles";
 import PropTypes from "prop-types";
 
 function ContactsList({
-  filteredContacts,
-  orderBy,
-  onDeleteContact,
-  onToggleOrderBy,
+  filteredContacts = [],
+  orderBy = "asc",
+  onDeleteContact = () => {},
+  onToggleOrderBy = () => {},
 }) {
   return (
     <>
@@ -67,13 +67,6 @@ ContactsList.propTypes = {
   orderBy: PropTypes.string.isRequired,
   onToggleOrderBy: PropTypes.func.isRequired,
   onDeleteContact: PropTypes.func.isRequired,
-};
-
-ContactsList.defaultProps = {
-  filteredContacts: [],
-  orderBy: "asc",
-  onToggleOrderBy: () => {},
-  onDeleteContact: () => {},
 };
 
 export default memo(ContactsList);
