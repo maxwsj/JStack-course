@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 
 import Header from "components/Header";
-import Routes from "../../Routes";
+import Router from "../../Router";
 import ToastContainer from "components/Toast/ToastContainer";
 
 import defaultTheme from "../../assets/styles/themes/default";
@@ -18,7 +18,7 @@ function App() {
         <ToastContainer />
         <Container>
           <Header />
-          <Routes />
+          <Router />
         </Container>
       </ThemeProvider>
     </BrowserRouter>
