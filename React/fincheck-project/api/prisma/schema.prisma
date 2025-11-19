@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -64,6 +63,8 @@ model Category {
   transactions Transaction[]
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("categories")
 }
 
 model Transaction {
