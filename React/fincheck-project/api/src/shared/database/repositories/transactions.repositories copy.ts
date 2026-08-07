@@ -3,26 +3,26 @@ import { PrismaService } from '../prisma-service';
 import { type Prisma } from '@prisma/client';
 
 @Injectable()
-export class BankAccountsRepository {
+export class TransactionsRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
-  findMany(findManyDto: Prisma.BankAccountFindManyArgs) {
-    return this.prismaService.bankAccount.findMany(findManyDto);
+  findMany(findManyDto: Prisma.TransactionFindManyArgs) {
+    return this.prismaService.transaction.findMany(findManyDto);
   }
 
-  findFirst(findFirstDto: Prisma.BankAccountFindFirstArgs) {
-    return this.prismaService.bankAccount.findFirst(findFirstDto);
+  findFirst(findFirstDto: Prisma.TransactionFindFirstArgs) {
+    return this.prismaService.transaction.findFirst(findFirstDto);
   }
 
-  create(createDto: Prisma.BankAccountCreateArgs) {
-    return this.prismaService.bankAccount.create(createDto);
+  create(createDto: Prisma.TransactionCreateArgs) {
+    return this.prismaService.transaction.create(createDto);
   }
 
-  update(updateDto: Prisma.BankAccountUpdateArgs) {
-    return this.prismaService.bankAccount.update(updateDto);
+  update(updateDto: Prisma.TransactionUpdateArgs) {
+    return this.prismaService.transaction.update(updateDto);
   }
 
-  delete(deleteDto: Prisma.BankAccountDeleteArgs) {
-    return this.prismaService.bankAccount.delete(deleteDto);
+  delete(deleteDto: Prisma.TransactionDeleteArgs) {
+    return this.prismaService.transaction.delete(deleteDto);
   }
 }
