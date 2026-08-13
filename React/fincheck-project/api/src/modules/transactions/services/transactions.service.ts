@@ -71,11 +71,13 @@ export class TransactionsService {
   async remove(userId: string, transactionId: string) {
     await this.validateEntitiesOwnership({ userId, transactionId });
 
-    return this.transactionsRepo.delete({
+    await this.transactionsRepo.delete({
       where: {
         id: transactionId,
       },
     });
+
+    return null;
   }
 
   private async validateEntitiesOwnership({
