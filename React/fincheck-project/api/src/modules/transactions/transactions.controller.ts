@@ -35,7 +35,7 @@ export class TransactionsController {
     @Query('month', ParseIntPipe) month: number,
     @Query('year', ParseIntPipe) year: number,
     @Query('bankAccountId', OptionalParseUUIDPipe) bankAccountId?: string,
-    @Query('type', new OptionalParseEnumPipe(TransactionType)) type?: string
+    @Query('type', new OptionalParseEnumPipe(TransactionType)) type?: TransactionType
   ) {
     return this.transactionsService.findAllByUserId(userId, { month, year, bankAccountId, type });
   }
