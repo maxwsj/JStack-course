@@ -32,10 +32,9 @@ export class TransactionsController {
     @ActiveUserId() userId: string,
     @Query('month', ParseIntPipe) month: number,
     @Query('year', ParseIntPipe) year: number,
-    @Query('bankAccountId', OptionalParseUUIDPipe) bankAccountId: number
+    @Query('bankAccountId', OptionalParseUUIDPipe) bankAccountId: string
   ) {
-    console.log('bankAccountId', bankAccountId);
-    return this.transactionsService.findAllByUserId(userId, { month, year });
+    return this.transactionsService.findAllByUserId(userId, { month, year, bankAccountId });
   }
 
   @Put(':transactionId')
