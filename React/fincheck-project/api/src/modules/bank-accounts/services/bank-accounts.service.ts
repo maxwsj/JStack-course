@@ -16,8 +16,30 @@ export class BankAccountsService {
     return this.bankAccountsRepo.create({ data: { userId, color, initialBalance, name, type } });
   }
 
-  findAllByUserId(userId: string) {
-    return this.bankAccountsRepo.findMany({ where: { userId } });
+  async findAllByUserId(userId: string) {
+    const bankAccounts = await this.bankAccountsRepo.findMany({
+      where: { userId },
+      include: {
+        transactions: {
+          select: {
+            type: true,
+            value: true,
+          },
+        },
+      },
+    });
+    return bankAccounts.map(({ transactions, ...bankAccount }) => {
+      const totalTransactions = transactions.reduce((acc, transaction) => {
+        return acc + (transaction.type === 'INCOME' ? transaction.value : -transaction.value);
+      }, 0);
+
+      const currentBalance = bankAccount.initialBalance + totalTransactions;
+
+      return {
+        ...bankAccount,
+        currentBalance,
+      };
+    });
   }
 
   async update(userId: string, bankAccountId: string, updateBankAccountDto: UpdateBankAccountDto) {
