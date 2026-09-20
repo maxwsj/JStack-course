@@ -1,8 +1,11 @@
-export function Logo() {
+interface LogoProps {
+  className?: string;
+}
+
+export function Logo(props: LogoProps) {
   return (
     <svg
-      width="105"
-      height="24"
+      className={props.className}
       viewBox="0 0 105 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
