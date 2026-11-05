@@ -13,10 +13,7 @@ const schema = z.object({
     .min(8, "Senha deve ter no mínimo 8 caracteres"),
 });
 
-type FormData = {
-  email: string;
-  password: string;
-};
+type FormData = z.infer<typeof schema>;
 
 export function useLoginController() {
   const {
