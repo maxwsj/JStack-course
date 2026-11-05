@@ -27,7 +27,12 @@ export function Login() {
       </header>
 
       <form onSubmit={handleSubmit} className="mt-[60px] flex flex-col gap-4">
-        <Input {...register("email")} type="email" placeholder="E-mail" />
+        <Input
+          {...register("email")}
+          type="email"
+          placeholder="E-mail"
+          error="Informe o email"
+        />
         {errors.email && (
           <span className="text-sm text-red-500">{errors.email.message}</span>
         )}

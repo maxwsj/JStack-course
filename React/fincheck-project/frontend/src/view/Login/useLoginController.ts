@@ -27,7 +27,9 @@ export function useLoginController() {
     resolver: zodResolver(schema),
   });
 
-  const handleSubmit = hookFormHandleSubmit((data) => {});
+  const handleSubmit = hookFormHandleSubmit((data) => {
+    console.log("Chama a API com: ", data);
+  });
 
   return { handleSubmit, register, errors };
 }
